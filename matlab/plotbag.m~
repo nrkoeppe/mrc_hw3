@@ -28,35 +28,17 @@ ts = timeseries(bagselect,'X','Y','Theta','LinearVelocity','AngularVelocity');
 % y is the y position of the turtle
 % vel is the LinearVelocity of the turtle
 % th is the heading angle of the turtle in radians
-t = ts.time;
 x = ts.data(:,1);
 y = ts.data(:,2);
-theta = ts.data(:,3);
+th = ts.data(:,3);
 vel = ts.data(:,4);
-
-u = vel.*cos(theta);
-v = vel.*sin(theta);
+u = vel.*cos(th);
+v = vel.*sin(th);
 ii = 1:10:length(x);  % Decimate the data so that it plot only every Nth point.
 
 figure
 quiver(x(ii),y(ii),u(ii),v(ii))
 axis square
 title('Quiver Plot of turtle1/pose')
-xlabel('x pos')
+xlabel('x')
 ylabel('y pos')
-print('pose_quiver','-dpng')
-
-figure
-plot(t-t(1), theta)
-title('Angular Position of turtle1/pose')
-xlabel('time [s]')
-ylabel('theta [rad]')
-print('pose_theta','-dpng')
-
-figure
-plot(x(ii),y(ii))
-axis square
-title('Postion Plot of turtle1/pose')
-xlabel('x pos')
-ylabel('y pos')
-print('pose_xy','-dpng')
